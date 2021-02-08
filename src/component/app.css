@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+}
+.outerGameArea {
+  display: grid;
+  grid-template-columns: 1fr 85vh 1fr;
+  margin: auto;
+  width: 90%;
+  background-color: wheat;
+}
+
+.input {
+  display: flex;
+  background-color: rgba(80, 83, 87, 0.315);
+  margin: 10px;
+  text-align: center;
+  justify-content: center;
+}
+
+input {
+  width: 75%;
+  height: 2rem;
+  font-size: 1.6rem;
+}
+.grid {
+  display: grid;
+  grid-template: repeat(10, 1fr) / repeat(10, 1fr);
+  width: 85vh;
+  background-color: blue;
+}
+
+.deployButton {
+  position: absolute;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  width: 50vh;
+  height: 50vh;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  font-size: 70px;
+  font-weight: 700;
+  font-style: italic;
+  color: white;
+  border-radius: 50%;
+  background-color: red;
+  border: 10px solid black;
+  outline: none;
+  box-shadow: 0px 0px 8px 20px rgba(128, 128, 128, 0.801);
+}
+.deployButton:hover {
+  color: orange;
+}
+.deployButton:active {
+  transform: scale(0.95);
+  transition-duration: 0.5s;
+}
+
+.square {
+  text-align: center;
+  content: "";
+  display: block;
+  padding-top: 100%;
+  border: 2px solid black;
+}
+
+.square[data-column="F"] {
+  background-color: green;
+}
+.square[data-row="5"] {
+  background-color: grey;
+}
+.square[data-colrow] {
+  background-color: lightblue;
+}
+.squareContent {
+  width: 100%;
+  height: 100%;
+}
