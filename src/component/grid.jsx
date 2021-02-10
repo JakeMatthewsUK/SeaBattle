@@ -1,49 +1,45 @@
-import Input from "./input.jsx";
-
 function Grid(props) {
-  const templateCells = [];
   const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const ships = {
     battleship: {
-      length: 5,
+      name: "battleship",
       cellPositions: [],
       hitpoints: 5,
+      shipLength: 5,
       sunk: false,
     },
     destroyer1: {
-      length: 4,
+      name: "destroyer1",
       cellPositions: [],
       hitpoints: 4,
+      shipLength: 4,
       sunk: false,
     },
     destroyer2: {
-      length: 4,
+      name: "destroyer2",
       cellPositions: [],
       hitpoints: 4,
+      shipLength: 4,
       sunk: false,
     },
   };
   let invalidPositions = [];
+  let shipsLeft = 3;
+  const templateCells = [];
 
   for (let numberPos = 0; numberPos < 10; numberPos++) {
     for (let letterPos = 0; letterPos < 10; letterPos++) {
       let nextCell = {
-        column: letters[letterPos],
-        row: numbers[numberPos],
-        baseClass: "square",
         key: letters[letterPos] + numbers[numberPos],
         sunk: false,
-        name: "empty",
       };
       templateCells.push(nextCell);
     }
   }
-
   function checkPlacement(ship, cellPositions) {
     for (let i = 0; i < cellPositions.length; i++) {
       //check that each position is valid
-
       for (let pos = 0; pos < invalidPositions.length; pos++) {
         if (
           invalidPositions[pos][0] === cellPositions[i][0] &&
@@ -58,11 +54,12 @@ function Grid(props) {
 
     for (let i = 0; i < cellPositions.length; i++) {
       for (let j = 0; j < cellPositions[i].length; j++) {
-        document.querySelector(
+        let shipCell = document.querySelector(
           `div.square[data-colrow= ${
             letters[cellPositions[i][0]] + cellPositions[i][1].toString()
           }]`
-        ).style.backgroundColor = "yellow";
+        );
+        shipCell.setAttribute("data-ship", ships[ship].name);
       }
     }
     for (
@@ -82,39 +79,80 @@ function Grid(props) {
   }
 
   function deployFleet(e) {
+    console.log("1");
     e.target.disabled = "true";
     e.target.style.visibility = "hidden";
+    shipsLeft = 3;
+    invalidPositions = [];
+
+    let gridElement = document.getElementsByClassName("square");
+
+    for (let i = 0; i < gridElement.length; i++) {
+      gridElement[i].setAttribute("data-bombed", "no");
+      gridElement[i].setAttribute("data-sunk", "no");
+      gridElement[i].setAttribute("data-ship", "no");
+      gridElement[i].style.backgroundColor = "blue";
+    }
+    console.log("2");
+
     for (const ship in ships) {
+      ships[ship].hitpoints = ships[ship].shipLength;
+      ships[ship].cellPositions = [];
+      console.log("3");
       while (ships[ship].cellPositions.length === 0) {
         let orientation = Math.floor(2 * Math.random())
           ? "vertical"
           : "horizontal";
         let row =
           orientation === "vertical"
-            ? 1 + Math.floor((10 - ships[ship].length) * Math.random())
+            ? 1 + Math.floor((10 - ships[ship].shipLength) * Math.random())
             : 1 + Math.floor(10 * Math.random());
         let col =
           orientation === "vertical"
             ? Math.floor(10 * Math.random())
-            : Math.floor((10 - ships[ship].length) * Math.random());
+            : Math.floor((10 - ships[ship].shipLength) * Math.random());
         let cellPositions = [];
 
-        for (let i = 0; i < ships[ship].length; i++) {
+        for (let i = 0; i < ships[ship].hitpoints; i++) {
           cellPositions.push(
             orientation === "vertical" ? [col, row + i] : [col + i, row]
           );
         }
+        console.log("4");
         checkPlacement(ship, cellPositions);
+        console.log("5");
       }
     }
   }
 
-  function handleClick() {
-    console.log("click detected");
-    let cells = document.getElementsByName("empty");
+  function sinkShip(activeShip) {
+    for (let i = 0; i < ships[activeShip].cellPositions.length; i++) {
+      let sunkCell = document.querySelector(
+        `div.square[data-colrow= ${
+          letters[ships[activeShip].cellPositions[i][0]] +
+          ships[activeShip].cellPositions[i][1].toString()
+        }]`
+      );
+      sunkCell.setAttribute("data-sunk", "yes");
+    }
+    shipsLeft--;
+    if (shipsLeft === 0) {
+      let gameOverButton = document.getElementById("gameOverButton");
+      gameOverButton.style.visibility = "visible";
+      gameOverButton.disabled = false;
+    }
+  }
 
-    for (let i = 0; i < cells.length; i++) {
-      cells[i].style.backgroundColor = "grey";
+  function handleClick(e) {
+    if (e.target.getAttribute("data-bombed") === "no") {
+      e.target.setAttribute("data-bombed", "yes");
+      let activeShip = e.target.getAttribute("data-ship");
+      if (activeShip !== "no") {
+        ships[activeShip].hitpoints--;
+        if (ships[activeShip].hitpoints === 0) {
+          sinkShip(activeShip);
+        }
+      }
     }
   }
 
@@ -122,20 +160,23 @@ function Grid(props) {
     <section className="grid" id="grid">
       {templateCells.map((cell) => (
         <div
-          data-column={cell.column}
-          data-row={cell.row}
+          className="square"
+          data-ship="no"
+          data-target="no"
+          data-bombed="no"
+          data-sunk="no"
           data-colrow={cell.key}
-          className={cell.baseClass}
           key={cell.key}
-          name={cell.name}
           onClick={handleClick}
-          data-ship="none"
         >
           <div className="squareContent"></div>
         </div>
       ))}
       <button className="deployButton" onClick={deployFleet}>
         Deploy Fleet
+      </button>
+      <button id="gameOverButton" onClick={deployFleet}>
+        Game Over! Click to Restart
       </button>
     </section>
   );
