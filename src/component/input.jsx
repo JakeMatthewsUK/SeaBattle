@@ -1,9 +1,8 @@
 function Input(props) {
-    return (
+  
+  return (
     <div>
-      <h1 className="input">
-        Input Area
-      </h1>
+      <h1 className="input">Input Area</h1>
       <input type="text" placeholder="Choose a cell eg 'A1'" />
     </div>
   );

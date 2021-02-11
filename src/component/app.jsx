@@ -1,19 +1,20 @@
-import Grid from "./grid.jsx";
 import Input from "./input.jsx";
 import "./app.css";
+import GameBoard from "./gameBoard.jsx";
 
 function App() {
-  function doStuff() {
-    alert("stuff was done");
-  }
+
+    function handleClick(){
+
+    }
 
   return (
     <main>
       <h1>BattleShip</h1>
       <div className="outerGameArea">
         <div></div>
-        <Grid doStuff={doStuff} />
-        <Input doStuff={doStuff} />
+        <GameBoard handleClick={handleClick}/>
+        <Input handleClick={handleClick}/>
       </div>
     </main>
   );

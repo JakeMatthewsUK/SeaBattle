@@ -70,35 +70,6 @@ input {
   transform: scale(0.95);
   transition-duration: 0.5s;
 }
-#gameOverButton {
-  position: absolute;
-  display: block;
-  align-items: center;
-  justify-content: center;
-  visibility: hidden;
-  width: 50vh;
-  height: 50vh;
-  margin: auto;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  font-size: 4.5vw;
-  font-weight: 700;
-  font-style: italic;
-  overflow: hidden;
-  color: white;
-  background-color: rgb(153, 153, 153);
-  border: 2px solid black;
-  outline: none;
-}
-#gameOverButton:hover {
-  color: orange;
-}
-#gameOverButton:active {
-  transform: scale(0.95);
-  transition-duration: 0.5s;
-}
 
 .square {
   text-align: center;
@@ -125,4 +96,56 @@ input {
 .squareContent {
   width: 100%;
   height: 100%;
+}
+
+.calmOcean {
+  background-color: blue;
+}
+
+.calmOcean.hit {
+  background: radial-gradient(red, blue);
+}
+/* .ship {
+  background-color: grey;
+} */
+.ship.hit {
+  background: radial-gradient(red, grey);
+}
+
+.ship.sunk {
+  background: none;
+  background-color: purple;
+}
+
+.gameOverButton {
+  position: absolute;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  width: 50vh;
+  height: 50vh;
+  margin: auto;
+  opacity: 0.9;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  font-size: 4.5vw;
+  font-weight: 700;
+  font-style: italic;
+  overflow: hidden;
+  color: white;
+  background-color: rgba(153, 153, 153, 0.527);
+  border: 2px solid black;
+  outline: none;
+}
+.gameOverButton:hover {
+  color: orange;
+}
+.gameOverButton:active {
+  transform: scale(0.95);
+  transition-duration: 0.5s;
+}
+.hiddenButton {
+  display: none;
 }
