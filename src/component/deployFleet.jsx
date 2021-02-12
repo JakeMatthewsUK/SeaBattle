@@ -1,60 +1,53 @@
-function deployFleet() {
+function DeployFleet() {
   let shipNames = ["battleship", "destroyer1", "destroyer2"];
   let fleet = {
-    shipNames: shipNames,
     battleship: {
-      name: "battleship",
-      cellPositions: [],
       hitpoints: 5,
-      shipLength: 5,
-      intact: true,
     },
     destroyer1: {
-      name: "destroyer1",
-      cellPositions: [],
       hitpoints: 4,
-      shipLength: 4,
-      intact: true,
     },
     destroyer2: {
-      name: "destroyer2",
-      cellPositions: [],
       hitpoints: 4,
-      shipLength: 4,
-      intact: true,
-    },
-
-    countActiveShips() {
-      return (
-        this.battleship.intact + this.destroyer1.intact + this.destroyer2.intact
-      );
     },
   };
 
-  let currentShipCellPositions;
+  let gridArray = [];
+
+  for (let i = 0; i < 100; i++) {
+    gridArray.push({
+      cellNumber: i,
+      ship: false,
+      bombed: false,
+      sunk: false,
+    });
+  }
+
   let currentShip;
+  let currentShipCellPositions;
 
   function positionShips() {
     currentShip = 0;
     while (currentShip < 3) {
       currentShipCellPositions = [];
+
       let orientation = Math.floor(2 * Math.random())
         ? "vertical"
         : "horizontal";
       let row =
         orientation === "vertical"
           ? Math.floor(
-              (10 - fleet[shipNames[currentShip]].shipLength) * Math.random()
+              (10 - fleet[shipNames[currentShip]].hitpoints) * Math.random()
             )
           : Math.floor(10 * Math.random());
       let column =
         orientation === "vertical"
           ? Math.floor(10 * Math.random())
           : Math.floor(
-              (10 - fleet[shipNames[currentShip]].shipLength) * Math.random()
+              (10 - fleet[shipNames[currentShip]].hitpoints) * Math.random()
             );
 
-      for (let i = 0; i < fleet[shipNames[currentShip]].shipLength; i++) {
+      for (let i = 0; i < fleet[shipNames[currentShip]].hitpoints; i++) {
         currentShipCellPositions.push(
           orientation === "vertical"
             ? { columnNumber: column, rowNumber: row + i }
@@ -66,44 +59,30 @@ function deployFleet() {
   }
 
   function checkPlacement() {
-    for (let shipNumber = 0; shipNumber < currentShip; shipNumber++) {
-      console.log(fleet[shipNames[shipNumber]].shipLength);
-      for (
-        let shipCell = 0;
-        shipCell < fleet[shipNames[shipNumber]].shipLength;
-        shipCell++
-      ) {
-        for (
-          let currentShipCell = 0;
-          currentShipCell < currentShipCellPositions.length;
-          currentShipCell++
-        ) {
-          if (
-            Math.abs(
-              currentShipCellPositions[currentShipCell].rowNumber -
-                fleet[shipNames[shipNumber]].cellPositions[shipCell].rowNumber
-            ) < 2
-          ) {
-            if (
-              Math.abs(
-                currentShipCellPositions[currentShipCell].columnNumber -
-                  fleet[shipNames[shipNumber]].cellPositions[shipCell]
-                    .columnNumber
-              ) < 2
-            ) {
-              return;
+    for (let r = 0; r < 10; r++) {
+      for (let c = 0; c < 10; c++) {
+        if (gridArray[r * 10 + c].ship !== false) {
+          for (let i = 0; i < currentShipCellPositions.length; i++) {
+            if (Math.abs(currentShipCellPositions[i].rowNumber - r) < 2) {
+              if (Math.abs(currentShipCellPositions[i].columnNumber - c) < 2) {
+                return;
+              }
             }
           }
         }
       }
     }
-    fleet[shipNames[currentShip]].cellPositions = currentShipCellPositions;
+
+    for (let i = 0; i < currentShipCellPositions.length; i++) {
+      let rowPart = currentShipCellPositions[i].rowNumber * 10;
+      let columnPart = currentShipCellPositions[i].columnNumber;
+      gridArray[rowPart + columnPart].ship = shipNames[currentShip];
+    }
     currentShip++;
   }
 
   positionShips();
-
-  return fleet;
+  return [gridArray, fleet];
 }
 
-export default deployFleet;
+export default DeployFleet;
