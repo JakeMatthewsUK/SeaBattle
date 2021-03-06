@@ -1,12 +1,50 @@
-# Getting Started with Create React App
+# Simplified Web Battleship
+
+A single player version of battleship in which the player sinks ships that are randomly placed by an algorithm.
+
+## Table of contents
+
+- [General Information](#general-information)
+- [Sample Images](#sample-images)
+- [Technologies Used](#technologies-used)
+- [Setup](#setup)
+- [Features](#features)
+- [Current Status](#current-status)
+- [Contact](#contact)
+
+## General information
+
+The aim of this project was to gain experience using React.js, whilst completing a task to a specification in a job advert. It helped improve my understanding of state and props, and demonstrated to me the suitability of React to highly modular applications (including games like battleship, chess, etc).
+
+On page load (or on pressing restart at the end of a game), the state of the App component is set. This uses a function that randomly places the ships and returns gridArray (a 100 long array of objects describing whether or not each cell on the grid had been bombed and whether it contains an intact or sunken ship. Using props, gridArray is used as a template by the Gameboard component to render 100 divs into a HTML grid, each with their own class attributes that allows, for example, bombed squares to be style differently to unbombed squares through css.
+
+User input is taken either through a click event (via a function prop passed down to each grid square) or through text input (which ininitiates a click event on the appropriate square). These actions then update App.state, which re-renders the selected square. When a ship is bombed its hitpoint integer is reduced, until it reaches 0 at which point it is marked as 'sunk' (and styled as such via css). When all ships have been marked as sunk, the game ends and the user can restart by clicking the restart button (or refreshing the page) to reset state.
+
+## Sample Images
+
+#### A game in progress, viewed in Chrome DevTools:
+
+![Example screenshot](./screenshotForReadMe.png)
+
+## Technologies Used
+
+- React.js
+- HTML5
+- CSS3
+
+## Setup
+
+The game can be played on my website at: (address to follow). It contains no images or dependencies, and can be rebuilt or hosted locally by cloning this repository and following the steps from the React documentation below:
+
+### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+#### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -14,12 +52,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+#### `npm test`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+#### `npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -29,42 +67,56 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Code Example
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### The following function creates an array object with 100 divs, each with classNames based on the state of that cell in the game.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    const newGrid = this.props.gridArray.map((cell) => {
+      let className = "square";
+      className += cell.ship ? " ship" : "";
+      className += cell.sunk ? " sunk" : "";
+      className += cell.bombed ? " bombed" : "";
+      return (
+        <div
+          id={cell.cellNumber}
+          className={className}
+          onClick={this.props.handleClick}
+          key={cell.cellNumber}
+        />
+      );
+    });
+    return newGrid;
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### When rendered by the Gameboard component, the display is updated based on the classes using radial colour gradients:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+    .bombed {
+        background: radial-gradient(black, blue, blue);
+    }
 
-## Learn More
+    .ship.bombed {
+        background: radial-gradient(red, orange, grey, grey);
+    }
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    .ship.sunk {
+        background: radial-gradient(red, orange, blue);
+    }
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Features
 
-### Code Splitting
+Things I like about the project:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- The way the game is built from very basic components with no images or dependencies
+- Component based structure and design abstraction allows the game to by modified to a different version with minimal changes to the code
 
-### Analyzing the Bundle Size
+New features that could be added / things that could be improved:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Handling of keyboard input could be improved using regular expressions
+- The game could be updated to a two-player version, possibly over a network, but this was not in the design specification
 
-### Making a Progressive Web App
+## Current Status
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The project is live on my website at (address to follow). There are no current plans to modify it.
 
-### Advanced Configuration
+## Contact
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For more information, please contact [@JakeMatthewsUK](https://www.jakematthews.uk/).
