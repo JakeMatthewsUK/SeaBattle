@@ -1,54 +1,52 @@
 import React from "react";
 
 class Input extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.handleKeyPess = this.handleKeyPess.bind(this);
   }
 
   handleKeyPess(e) {
     if (e.code === "Enter" || e.key === "Enter") {
       let value = e.target.value;
-      e.target.value = "";
+      e.target.value = ""; //reset the input field
       let row = "";
       let col = null;
 
       for (let i = 0; i < value.length; i++) {
-        let letter = value[i];
-        let charCode = letter.charCodeAt(0);
+        let character = value[i];
+        let charCode = character.charCodeAt(0); //convert to unicode integer
         if (charCode >= 65 && charCode <= 75) {
-          col = charCode - 65;
+          col = charCode - 65; //use number inputs to update col variable
         } else if (charCode >= 97 && charCode <= 107) {
           col = charCode - 97;
         } else if (charCode >= 48 && charCode <= 57) {
-          row += charCode - 48;
+          row += charCode - 48; //use letter inputs to update row variable
         }
       }
       if (row !== "" && col !== null) {
-        row = parseInt(row);
+        row = parseInt(row); //where both a letter and a number have been input, parse the row variable to an int and subtract one (zero base)
         row--;
         if (row < 10 && row >= 0) {
           if (col < 10 && col >= 0) {
-            let target = row * 10 + col;
-            if (this.props.gameState === "inplay") {
-              document.getElementById(target).click();
-            }
+            let target = row * 10 + col; //where (0<= row,col <10), a valid input between A1 and J10 has been detected -> programmatically click on the
+            document.getElementById(target).click(); //...appropriate div so that App.state is modified by its handleClick function
           }
         }
       }
     } else if (e.target.value.length > 2) {
-      e.target.value = "";
+      e.target.value = ""; //where the input is getting too large, reset it
     }
   }
 
   render() {
     return (
-      <div>
-        <h1 className="input">Input Area</h1>
+      <div className="input">
+        <h3>Choose a cell:</h3>
         <input
           className="inputArea"
           type="text"
-          placeholder="Choose a cell eg 'A1'"
+          placeholder="eg 'A1'"
           onKeyPress={this.handleKeyPess}
         />
       </div>
