@@ -24,7 +24,7 @@ User input is taken either through a click event (via a function prop passed dow
 
 #### A game in progress, viewed in Chrome DevTools:
 
-![Example screenshot](./screenshotForReadMe.png)
+![Example screenshot](./battleship.gif)
 
 ## Technologies Used
 
