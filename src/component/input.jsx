@@ -42,7 +42,7 @@ class Input extends React.Component {
   render() {
     return (
       <div className="input">
-        <h3>Choose a cell:</h3>
+        <h2>Choose a cell:</h2>
         <input
           className="inputArea"
           type="text"

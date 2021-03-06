@@ -9,7 +9,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      shipsLeft: Object.keys(setShipHitpoints()).length,  //returns the number of ships the game starts with
+      shipsLeft: Object.keys(setShipHitpoints()).length, //returns the number of ships the game starts with
       gridArray: deployFleet(), //deployfleet randomly deploys the ships and returns a 100 long array describing the contents of each square
       fleet: setShipHitpoints(), //the fleet object denotes how may hit points each ship has left before sinking
       gameState: "initial", //initial is before the deploy button is pressed, inplay when deploy button is hidden, and final for end of game

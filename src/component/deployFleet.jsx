@@ -19,7 +19,7 @@ export function deployFleet() {
 
   for (let i = 0; i < 100; i++) {
     gridArray.push({
-      cellNumber: i,
+      cellIndex: i,
       ship: false, //initially a bool - may stay false, or may change to the name of the ship that is present
       bombed: false, //initially false, true if bombed
       sunk: false, //initially false, true if it contains a sunk ship cell
