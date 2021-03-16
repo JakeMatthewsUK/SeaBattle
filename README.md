@@ -1,4 +1,4 @@
-# Simplified Web Battleship
+# Sea Battle
 
 A single player version of battleship in which the player sinks ships that are randomly placed by an algorithm.
 
@@ -16,15 +16,15 @@ A single player version of battleship in which the player sinks ships that are r
 
 The aim of this project was to gain experience using React.js, whilst completing a task to a specification in a job advert. It helped improve my understanding of state and props, and demonstrated to me the suitability of React to highly modular applications (including games like battleship, chess, etc).
 
-On page load (or on pressing restart at the end of a game), the state of the App component is set. This uses a function that randomly places the ships and returns gridArray (a 100 long array of objects describing whether or not each cell on the grid had been bombed and whether it contains an intact or sunken ship. Using props, gridArray is used as a template by the Gameboard component to render 100 divs into a HTML grid, each with their own class attributes that allows, for example, bombed squares to be style differently to unbombed squares through css.
+On page load (or on pressing restart at the end of a game), the state of the App component is set. This uses a function that randomly places the ships and returns gridArray (a 100 long array of objects describing whether or not each cell on the grid had been bombed and whether it contains an intact or sunken ship. Using props, gridArray is used as a template by the gameBoard component to render 100 divs into a HTML grid, each with their own class attributes that allows, for example, bombed squares to be style differently to unbombed squares through css.
 
-User input is taken either through a click event (via a function prop passed down to each grid square) or through text input (which ininitiates a click event on the appropriate square). These actions then update App.state, which re-renders the selected square. When a ship is bombed its hitpoint integer is reduced, until it reaches 0 at which point it is marked as 'sunk' (and styled as such via css). When all ships have been marked as sunk, the game ends and the user can restart by clicking the restart button (or refreshing the page) to reset state.
+User input is taken either through a click event (via a function prop passed down to each grid square) or through text input (which initiates a click event on the appropriate square). These actions then update App.state, which re-renders the selected square. When a ship is bombed its hitpoint integer is reduced, until it reaches 0 at which point it is marked as 'sunk' (and styled as such via css). When all ships have been marked as sunk, the game ends and the user can restart by clicking the restart button (or refreshing the page) to reset state.
 
 ## Sample Images
 
 #### A game in progress, viewed in Chrome DevTools:
 
-![Example screenshot](./battleship.gif)
+![Example screenshot](./seaBattle.gif)
 
 ## Technologies Used
 
@@ -87,7 +87,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
     });
     return newGrid;
 
-#### When rendered by the Gameboard component, the display is updated based on the classes using radial colour gradients:
+#### When rendered by the gameBoard component, the display is updated based on the classes using radial colour gradients:
 
     .bombed {
         background: radial-gradient(black, blue, blue);
@@ -105,17 +105,17 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 Things I like about the project:
 
-- The way the game is built from very basic components with no images or dependencies
+- It is built from very basic components with no images or dependencies
 - Component based structure and design abstraction allows the game to by modified to a different version with minimal changes to the code
 
 New features that could be added / things that could be improved:
 
 - Handling of keyboard input could be improved using regular expressions
-- The game could be updated to a two-player version, possibly over a network, but this was not in the design specification
+- The game could be updated to a two-player version, possibly over a network, but this was not in the design specification and has copyright implications
 
 ## Current Status
 
-The project is live on my website at (address to follow). There are no current plans to modify it.
+The project is live on my website at (address to follow) for demonstration purposes. There are no current plans to modify it.
 
 ## Contact
 

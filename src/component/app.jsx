@@ -86,7 +86,7 @@ class App extends React.Component {
   render() {
     return (
       <main>
-        <h1>Battleship</h1>
+        <h1>Sea Battle</h1>
         <div className="outerGameArea">
           <div className="blankDiv"></div>
           <Gameboard //the 10x10 grid
