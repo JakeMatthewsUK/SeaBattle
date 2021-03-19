@@ -111,12 +111,12 @@ Things I like about the project:
 New features that could be added / things that could be improved:
 
 - Handling of keyboard input could be improved using regular expressions
-- The game could be updated to a two-player version, possibly over a network, but this was not in the design specification and has copyright implications
+- The game could be updated to a two-player version, possibly over a network, but this was not in the design specification and may have copyright implications
 
 ## Current Status
 
-The project is live on my website at (address to follow) for demonstration purposes. There are no current plans to modify it.
+The project is live on my website at https://seabattle.surge.sh for demonstration purposes. There are no current plans to modify it.
 
 ## Contact
 
-For more information, please contact [@JakeMatthewsUK](https://www.jakematthews.uk/).
+For more information, please contact [@JakeMatthewsUK](mailto:jake.matthews.uk@gmail.com).
