@@ -34,7 +34,7 @@ User input is taken either through a click event (via a function prop passed dow
 
 ## Setup
 
-The game can be played on my website at: (address to follow). It contains no images or dependencies, and can be rebuilt or hosted locally by cloning this repository and following the steps from the React documentation below:
+The game can be played at https://seabattle.netlify.app/. It contains no images or dependencies, and can be rebuilt or hosted locally by cloning this repository and following the steps from the React documentation below:
 
 ### Getting Started with Create React App
 
@@ -115,7 +115,7 @@ New features that could be added / things that could be improved:
 
 ## Current Status
 
-The project is live on my website at https://seabattle.surge.sh for demonstration purposes. There are no current plans to modify it.
+The project is live on my website at https://seabattle.netlify.app/ for demonstration purposes. There are no current plans to modify it.
 
 ## Contact
 
