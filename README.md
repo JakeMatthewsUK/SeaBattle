@@ -119,4 +119,4 @@ The project is live on my website at https://seabattle.netlify.app/ for demonstr
 
 ## Contact
 
-For more information, please contact [@JakeMatthewsUK](mailto:jake.matthews.uk@gmail.com).
+For more information, please contact [@JakeMatthewsUK](https://www.jakematthews.uk/).
