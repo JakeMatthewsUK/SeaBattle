@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
   user-select: none;
-  touch-action: none;
 }
 
 main {
@@ -51,6 +50,7 @@ h1 {
   grid-template: repeat(10, 1fr) / repeat(10, 1fr);
   width: 85vh;
   background-color: blue;
+  touch-action: none;
 }
 
 .gameButton {
@@ -72,6 +72,7 @@ h1 {
   border: 10px solid black;
   outline: none;
   box-shadow: 0px 0px 10px 15px rgba(128, 128, 128, 0.801);
+  touch-action: none;
 }
 .gameButton.initial:active {
   transform: scale(0.95);
@@ -119,6 +120,7 @@ h1 {
   content: "";
   color: rgb(128, 128, 128);
   font-size: 20px;
+  touch-action: none;
 }
 
 @media only screen and (max-width: 600px) {
