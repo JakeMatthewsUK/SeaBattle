@@ -14,7 +14,7 @@ A single player version of battleship in which the player sinks ships that are r
 
 ## General information
 
-The aim of this project was to gain experience using React.js, whilst completing a task to a specification in a job advert. It helped improve my understanding of state and props, and demonstrated to me the suitability of React to highly modular applications (including games like battleship, chess, etc).
+The aim of this project was to gain experience using React.js, whilst completing a task to a given specification. It helped improve my understanding of state and props, and demonstrated to me the suitability of React to highly modular applications (including games like battleship, chess, etc).
 
 On page load (or on pressing restart at the end of a game), the state of the App component is set. This uses a function that randomly places the ships and returns gridArray (a 100 long array of objects describing whether or not each cell on the grid had been bombed and whether it contains an intact or sunken ship. Using props, gridArray is used as a template by the gameBoard component to render 100 divs into a HTML grid, each with their own class attributes that allows, for example, bombed squares to be styled differently to unbombed squares through css.
 
