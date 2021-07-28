@@ -29,7 +29,7 @@ class Input extends React.Component {
         row--;
         if (row < 10 && row >= 0) {
           if (col < 10 && col >= 0) {
-            let target = row * 10 + col; //where (0<= row,col <10), a valid input between A1 and J10 has been detected -> programmatically click on the
+            let target = col * 10 + row; //where (0<= row,col <10), a valid input between A1 and J10 has been detected -> programmatically click on the
             document.getElementById(target).click(); //...appropriate div so that App.state is modified by its handleClick function
           }
         }
